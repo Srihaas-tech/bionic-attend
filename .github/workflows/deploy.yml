@@ -30,12 +30,14 @@ jobs:
         run: |
           set -euo pipefail
           
+          # https://github.com/balena-io/balena-cli/releases/download/v22.4.11/balena-cli-v22.4.11-linux-x64-standalone.tar.gz
           url=$(.github/get_balena-cli_url.sh)
           echo "Using balena-cli from $url"
-          curl -L -o /tmp/balena.zip ${url}
-          unzip /tmp/balena.zip -d /opt
-          rm /tmp/balena.zip
-          export PATH=$PATH:/opt/balena-cli
+
+          curl -L -o /tmp/balena.tar.gz ${url}
+          tar -xzf /tmp/balena.tar.gz -C /opt
+          rm /tmp/balena.tar.gz
+          export PATH=$PATH:/opt/balena/bin
 
           
           trap "balena logout" EXIT # be sure to log out when done

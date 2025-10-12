@@ -12,6 +12,7 @@ on:
       - main
     paths-ignore:   # do not run if these are the only files that have changed
       - .github/**
+  workflow_dispatch:  # allow manual run from the Actions tab
 
 jobs:
   deploy:

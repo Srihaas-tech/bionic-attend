@@ -10,8 +10,8 @@ on:
   push:
     branches:
       - main
-    paths-ignore:   # do not run if these are the only files that have changed
-      - .github/**
+    # paths-ignore:   # do not run if these are the only files that have changed
+      # - .github/**
   workflow_dispatch:  # allow manual run from the Actions tab
 
 jobs:
@@ -31,6 +31,7 @@ jobs:
           set -euo pipefail
           
           url=$(.github/get_balena-cli_url.sh)
+          echo "Using balena-cli from $url"
           curl -L -o /tmp/balena.zip ${url}
           unzip /tmp/balena.zip -d /opt
           rm /tmp/balena.zip
